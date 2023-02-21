@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Togyz Kumalak Webgame</title>
+  <link href="{% static "togapp/styles.css" %}" rel="stylesheet">
+</head>
+<body>
+    <h3>Togyz Kumalak: play against random AI</h3>
+
+    {% autoescape off %}
+    <div id="board">
+        {{ html }}
+    </div>
+    {% endautoescape %}
+
+    <form method="post" action="{% url 'home' %}">
+        {% csrf_token %}
+        <input type="hidden" name="pos" value="{{ position }}">
+        <input type="hidden" name="notation" value="{{ moves }}">
+        <input type="text" name="move" placeholder="Enter your move">
+        <button type="submit">Send move</button>
+    </form><br>
+
+    <p>{{ turn }}</p>
+
+    <div id="moves">
+        {{ moves|linebreaksbr }}
+    </div>
+
+
+</body>
+</html>
